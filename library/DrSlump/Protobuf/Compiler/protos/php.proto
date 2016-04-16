@@ -1,4 +1,8 @@
-import "descriptor.proto";
+syntax = "proto2";
+
+
+
+import "google/protobuf/descriptor.proto";
 
 package php;
 

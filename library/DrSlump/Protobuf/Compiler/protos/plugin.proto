@@ -43,6 +43,7 @@
 // A plugin executable needs only to be placed somewhere in the path.  The
 // plugin should be named "protoc-gen-$NAME", and will then be used when the
 // flag "--${NAME}_out" is passed to protoc.
+syntax = "proto2";
 
 package google.protobuf.compiler;
 
