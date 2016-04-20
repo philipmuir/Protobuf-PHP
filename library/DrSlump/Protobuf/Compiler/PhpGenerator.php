@@ -390,7 +390,9 @@ class PhpGenerator extends AbstractGenerator
         $s[]= '    // @@protoc_insertion_point(scope_interface)';
         $s[]= '    // @@protoc_insertion_point(interface_' . $ns . '.' . $service->getName() . ')';
         $s[]= '';
-
+        $s[]= '    const SERVICE_NAME = "'.$ns.'.'.$service->getName().'";';
+        $s[]= '    const SERVICE_DESCRIPTOR = "'.base64_encode($service->serialize()).'";';
+        $s[]= '';
         foreach ($service->getMethodList() as $method):
         $s[]= '    /**';
 
@@ -400,8 +402,8 @@ class PhpGenerator extends AbstractGenerator
         $s[]= '     * ';
         endif;
 
-        $s[]= '     * @param ' . $this->normalizeNS($method->getInputType()) . ' $input';
-        $s[]= '     * @return ' . $this->normalizeNS($method->getOutputType());
+        $s[]= '     * @param \\' . $this->normalizeNS($method->getInputType()) . ' $input';
+        $s[]= '     * @return \\' . $this->normalizeNS($method->getOutputType());
         $s[]= '     */';
         $s[]= '    public function ' . $method->getName() . '(\\' . $this->normalizeNS($method->getInputType()) . ' $input);';
         $s[]= '';
@@ -444,7 +446,7 @@ class PhpGenerator extends AbstractGenerator
           $s[]= '     * ';
         }
 
-        $s[]= '     * @param ' . $ns_input . ' $input';
+        $s[]= '     * @param \\' . $ns_input . ' $input';
         $s[]= '     */';
         $server_stream = $method->getServerStreaming();
         $client_stream = $method->getClientStreaming();
