@@ -15,8 +15,8 @@ For more information see the [included man pages](http://drslump.github.com/Prot
 
 ## Requirements
 
-  - PHP 5.3  
-  - Pear's Console_CommandLine (for the protoc wrapper tool)
+  - PHP 5.3
+  - symfony/console package (see composer.json)
   - Google's `protoc` compiler version 2.3 or above
   - GMP or BC Math extensions ¹
 
@@ -167,7 +167,7 @@ In order to make your life easier, the supplied protoc plugin offers an addition
 execution mode, where it acts as a wrapper for the `protoc` invocation. It will
 automatically include the `php.proto` path so that you don't need to worry about it.
 
-    protoc-gen-php -o ./build tutorial.proto
+    protoc-gen-php proto:generate -o ./build tutorial.proto
 
 
 ## LICENSE:

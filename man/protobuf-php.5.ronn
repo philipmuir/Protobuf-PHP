@@ -37,7 +37,7 @@ that affect the generated source code.
 
 ## EXAMPLES ##
 
-    option (php.suffix) = ".pb.php"
+    option (php.suffix) = ".php"
     option (php.namespace) = "MyOrg.Protos"
     option (php.multifile) = true
     option (php.generic_services) = true

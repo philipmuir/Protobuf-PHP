@@ -3,7 +3,7 @@ protoc-gen-php(1) -- protoc compiler plugin
 
 ## SYNOPSIS
 
-  `protoc-gen-php` [`-v`] [`-o` _directory_] [`-i` _directory_] <file>...
+  `protoc-gen-php` proto:generate [`-v`] [`-o` _directory_] [`-i` _directory_] <file>...
 
 
 ## DESCRIPTION
@@ -70,20 +70,20 @@ The command accepts the following command-line options (switches).
 
 Generate a PHP file from a proto file:
 
-    $ protoc-gen-php tutorial.proto
+    $ protoc-gen-php proto:generate tutorial.proto
 
 Generate PHP files in the "build" directory for each proto file found the
 "protos" directory:
 
-    $ protoc-gen-php -o build protos/*.proto
+    $ protoc-gen-php proto:generate -o build protos/*.proto
 
 Generate a PHP file from a proto file using imports from an include path:
 
-    $ protoc-gen-php -i ./protos protos/tutorial.proto
+    $ protoc-gen-php proto:generate -i ./protos protos/tutorial.proto
 
 Generate a PHP file with a custom extension
 
-    $ protoc-gen-php -Dsuffix=pb.php tutorial.proto
+    $ protoc-gen-php proto:generate -Dsuffix=pb.php tutorial.proto
 
 
 ## BUGS ##
