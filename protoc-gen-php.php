@@ -22,27 +22,34 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+use Symfony\Component\Console\Application;
+use DrSlump\Protobuf\Compiler\ProcessProtoFileCommand;
+use DrSlump\Protobuf\Compiler\CompileProtoFileCommand;
+use DrSlump\Protobuf;
+
 // Set up default timezone
 date_default_timezone_set('GMT');
-
-// For non pear packaged versions use relative include path
-if (strpos('@php_bin@', '@php_bin') === 0) {
-    set_include_path(__DIR__ . DIRECTORY_SEPARATOR . 'library' . PATH_SEPARATOR . get_include_path());
-}
 
 // Disable strict errors for the compiler
 error_reporting(error_reporting() & ~E_STRICT);
 
-require_once 'DrSlump/Protobuf.php';
+require_once 'vendor/autoload.php';
 
+// TODO: remove this and use composer autoloader? - pm
+require_once 'library/DrSlump/Protobuf.php';
 // Setup autoloader
 \DrSlump\Protobuf::autoload();
 
 try {
-    // Run the cli interface
-    \DrSlump\Protobuf\Compiler\Cli::run(__FILE__);
-    exit(0);
+    $application = new Application();
+    $compileCommand = new CompileProtoFileCommand();
 
+    $application->add(new ProcessProtoFileCommand(null, __FILE__));
+    $application->add($compileCommand);
+    $application->setDefaultCommand($compileCommand->getName());
+    $application->run();
+
+    exit(0);
 } catch(Exception $e) {
     fputs(STDERR, (string)$e . PHP_EOL);
     exit(1);
